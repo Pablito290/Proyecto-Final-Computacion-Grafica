@@ -45,6 +45,14 @@ string Urano = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\gl
 string Neptuno = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\Neptuno.jpg";
 string Sol = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\Sol.jpg";
 string blanco = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\Blanco.jpg";
+string Tierralabel = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\TierraLabel.jpg";
+string Venuslabel = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\VenusLabel.jpeg";
+string Mercuriolabel = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\MercurioLabel.jpeg";
+string Martelabel = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\MarteLabel.jpeg";
+string Jupiterlabel = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\JupiterLabel.jpeg";
+string Saturnolabel = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\SaturnoLabel.jpeg";
+string Uranolabel = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\UranoLabel.jpeg";
+string Neptunolabel = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\NeptunoLabel.jpeg";
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
@@ -397,7 +405,12 @@ public:
 	float getRot() const {
         return paso;
     }
-	
+	int getflagRaio() const {
+        return flagRaio;
+    }
+    
+
+
     float getRaio() {
 	angulo += paso;
 	float theta = angulo * M_PI / 720.0;
@@ -489,33 +502,128 @@ private:
     int resolucion;
 };
 
-struct Estela {
+class Estela {
+    public:
     Estela(const std::string& _texturePath, int _cantidad, float _tam, int res, float _separacion) {
         Circulo= new Circle(_texturePath, _tam, res);
         cantidad = _cantidad;
         separacion=_separacion;
     }
-
-
-    void printCordenadas(){
-        // cout<<
-    }
-
     void Desfasar(Shader &shader, const glm::mat4& viewMatrix, const glm::mat4& projectionMatrix, float angle, float desfase, float raio, float razondesfase) {
 
         for (int i = 0; i < cantidad; i++) {
             Circulo->justorbita_Render(shader, viewMatrix, projectionMatrix, angle - (((i) *razondesfase) * desfase), raio, {0.0f, 1.0f, 0.0f}, -separacion * i);
         }
     }
-
-// Circulos[i]->justorbita_Render(shader, viewMatrix, projectionMatrix, angle - (((i+1) *10) * desfase), raio, {0.0f, 1.0f, 0.0f});
-
-    
-
+    private:
     Circle* Circulo;
     int cantidad;
     float tam;
     float separacion;
+};
+
+class Nombre : public Objeto{
+    public:
+    Nombre(const string & _texturePath) : Objeto({}, {}, _texturePath) {
+        initialize();
+    }
+    void initialize(){
+        vector<float> vertices={-0.1f,  0.1f, 0.0f,  0.0f, 1.0f,0,0,0,0.1f,  0.1f, 0.0f,  1.0f, 1.0f, 0,0,0,0.1f, -0.1f, 0.0f,  1.0f, 0.0f,  0,0,0,-0.1f, -0.1f, 0.0f,  0.0f, 0.0f ,0,0,0};
+        vector<unsigned int> indices;
+        //dame como seria el indice para un cuadrado
+        indices.push_back(0);
+        indices.push_back(1);
+        indices.push_back(2);
+        indices.push_back(0);
+        indices.push_back(2);
+        indices.push_back(3);
+        Objeto::updateVertices(vertices);
+        Objeto::updateIndices(indices);
+        Objeto::initialize();
+    }
+    private:
+    vector<float> vertices;
+};
+
+class Orbita : public Objeto{
+    public:
+    Orbita(const string & _texturePath, Sphere& esfera , int _resolucion = 20) : Objeto({}, {}, _texturePath) {
+        Esfera = &esfera;  
+        resolucion = _resolucion;
+        initialize();
+    }
+    void initialize(){
+        vector<float> vertices;
+        vector<unsigned int> indices;
+        const int slices = resolucion;
+        glm::vec3 normal = glm::vec3(0.0f, 0.0f, 1.0f); // Normal de la superficie del anillo, apuntando hacia +Z ya que está en el plano XY
+        float salto= 360/slices;
+        float radio = 0;
+        float innerradio = 0;
+        float angle = 0;
+        int contador=0;
+        
+        
+
+        for(;angle<720;angle+=Esfera->getRot(),contador++){
+            radio = Esfera->getRaio();
+            if(contador% static_cast<int>(salto) ==0){
+            innerradio = radio + 0.01;
+            vertices.push_back(cos(glm::radians(angle/2)) * radio);       // X
+            vertices.push_back(sin(glm::radians(angle/2)) * radio);       // Y
+            vertices.push_back(0.0f);             // Z
+            vertices.push_back((float)angle / 360); // U
+            vertices.push_back(0.0f);             // V
+            vertices.push_back(normal.x);         // Normal X
+            vertices.push_back(normal.y);         // Normal Y
+            vertices.push_back(normal.z);         // Normal Z
+
+            vertices.push_back(cos(glm::radians(angle/2)) * innerradio);  // X
+            vertices.push_back(sin(glm::radians(angle/2)) * innerradio);  // Y
+            vertices.push_back(0.0f);             // Z
+            vertices.push_back((float)angle / 360); // U
+            vertices.push_back(1.0f);             // V
+            vertices.push_back(normal.x);         // Normal X
+            vertices.push_back(normal.y);         // Normal Y
+            vertices.push_back(normal.z);         // Normal Z
+            }
+            contador++;
+        }
+        
+        for(int i=0;i<16;i++){
+            vertices.push_back(vertices[i]);       // X
+        }
+
+        for (int i = 0; i < (vertices.size()/16)-1; ++i) {
+            int outer1 = i * 2 * 8;
+            int inner1 = (i * 2 + 1) * 8;
+            int outer2 = ((i + 1) * 2) * 8;
+            int inner2 = ((i + 1) * 2 + 1) * 8;
+
+            indices.push_back(outer1 / 8);
+            indices.push_back(inner1 / 8);
+            indices.push_back(outer2 / 8);
+
+            indices.push_back(inner1 / 8);
+            indices.push_back(inner2 / 8);
+            indices.push_back(outer2 / 8);
+        }
+
+        
+        Objeto::updateVertices(vertices);
+        Objeto::updateIndices(indices);
+        Objeto::initialize();
+        setModelMatrix(glm::rotate(glm::mat4(1.0f), glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f)));
+    }
+
+
+    private:
+    int resolucion;
+    float radio;
+    float radio2;
+    Sphere* Esfera;
+
+
 };
 
 
@@ -580,9 +688,6 @@ class Rings : public Objeto {
         Objeto::updateIndices(indices);
         Objeto::initialize();
 }
-
-
-
     private:
         int resolucion;
         float radius;
@@ -590,22 +695,6 @@ class Rings : public Objeto {
         vector<float> center;
 };
 
-
-class ConjuntoObjetos {
-    public:
-    void addObjeto(shared_ptr<Objeto> objeto) {
-        objetos.push_back(objeto);
-    }
-    void aplicarTransformacion(const glm::mat4& transformacion) {
-        for (auto& objeto : objetos) {
-            
-        }
-    }
-    
-
-    private:
-    vector<shared_ptr<Objeto>> objetos;
-};
 
 
 
@@ -713,38 +802,51 @@ int main()
     Estela EstelaSol(blanco, cantidadEstela, tamanoEstela, estelaresolucion, 0.025f);
 
     Sphere Mercury(Mercurio, 0.05, 1.8f, 1.6f, 0.1f * acelera);
-    Rings OrbitaMercury(blanco, 1.8f, 1.75f);
-    OrbitaMercury.setModelMatrix(glm::rotate(OrbitaMercury.getModelMatrix(), glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f)));
-
+    Orbita OrbitaMercury(blanco, Mercury, 30);
     Estela EstelaMercury(blanco, cantidadEstela, tamanoEstela, estelaresolucion, 0.023f);
+    Nombre MercuryLabel(Mercuriolabel); MercuryLabel.setModelMatrix(glm::translate(MercuryLabel.getModelMatrix(), glm::vec3(0.0f, 0.2f, 0.0f)));
     
 
     Sphere Venus(VenusT, 0.08, 2.5f, 2.3f, 0.2f * acelera);
     Estela EstelaVenus(blanco, cantidadEstela, tamanoEstela, estelaresolucion, 0.023f);
+    Orbita OrbitaVenus(blanco, Venus, 30);
+    Nombre VenusLabel(Venuslabel); VenusLabel.setModelMatrix(glm::translate(VenusLabel.getModelMatrix(), glm::vec3(0.0f, 0.3f, 0.0f)));
     
     
     Sphere Earth(Tierra, 0.1, 3.3f, 2.5f, 0.15f * acelera);
     Estela EstelaTierra(blanco, cantidadEstela, tamanoEstela, estelaresolucion, 0.02f);
-
+    Orbita OrbitaEarth(blanco, Earth, 30);
     Sphere Moon(Luna, 0.03, 3.0f, 2.7f, 0.01f * acelera);
+    Nombre TierraLabel(Tierralabel); TierraLabel.setModelMatrix(glm::translate(TierraLabel.getModelMatrix(), glm::vec3(0.0f, 0.3f, 0.0f)));
+
     
     Sphere Mars(Marte, 0.07, 4.0f, 3.6f, 0.02f * acelera);
     Estela EstelaMarte(blanco, cantidadEstela, tamanoEstela, estelaresolucion, 0.023f);
-    
+    Orbita OrbitaMars(blanco, Mars, 30);
+    Nombre MarsLabel(Martelabel); MarsLabel.setModelMatrix(glm::translate(MarsLabel.getModelMatrix(), glm::vec3(0.0f, 0.3f, 0.0f)));
+
     Sphere Jupiter(JupiterT, 0.3, 5.0f, 4.5f, 0.05f * acelera);
     Estela EstelaJupiter(blanco, cantidadEstela, tamanoEstela, estelaresolucion, 0.023f);
+    Orbita OrbitaJupiter(blanco, Jupiter, 30);
+    Nombre JupiterLabel(Jupiterlabel); JupiterLabel.setModelMatrix(glm::translate(JupiterLabel.getModelMatrix(), glm::vec3(0.0f, 0.5f, 0.0f)));
 
     Sphere Saturn(Saturno, 0.2, 6.0f, 5.4f, 0.03f * acelera);
     Estela EstelaSaturno(blanco, cantidadEstela, tamanoEstela, estelaresolucion, 0.025f);
+    Orbita OrbitaSaturno(blanco, Saturn, 30);
+    Nombre SaturnLabel(Saturnolabel); SaturnLabel.setModelMatrix(glm::translate(SaturnLabel.getModelMatrix(), glm::vec3(0.0f, 0.4f, 0.0f)));
     
     Rings Anillos(AnillosT, 0.3f, 0.4f);
 
     Sphere Uranus(Urano, 0.15, 7.0f, 6.4f, 0.02f * acelera);
     Estela EstelaUrano(blanco, cantidadEstela, tamanoEstela, estelaresolucion, 0.025f);
+    Orbita OrbitaUrano(blanco, Uranus, 30);
+    Nombre UranusLabel(Uranolabel); UranusLabel.setModelMatrix(glm::translate(UranusLabel.getModelMatrix(), glm::vec3(0.0f, 0.4f, 0.0f)));
     
 
     Sphere Neptune(Neptuno, 0.15, 8.0f, 7.3f, 0.01f * acelera);
     Estela EstelaNeptuno(blanco, cantidadEstela, tamanoEstela, estelaresolucion, 0.025f);
+    Orbita OrbitaNeptuno(blanco, Neptune, 30);
+    Nombre  NeptuneLabel(Neptunolabel); NeptuneLabel.setModelMatrix(glm::translate(NeptuneLabel.getModelMatrix(), glm::vec3(0.0f, 0.4f, 0.0f)));
 
     Sphere Stars(Estrellas, 60.0f, 0, 0, 0, 5);
     
@@ -795,12 +897,12 @@ int main()
     float radio = 4+angle*0.01f;
     model = glm::rotate(model, glm::radians(radio), glm::vec3(0.0f, 1.0f, 0.0f));
     asteroides[i]->setModelMatrix(model);
-}
+    }
 
-for(int i=0;i<asteroides.size();i++){
-    float angle = rand() % 360; // Genera un número aleatorio entre 0 y 359
-    anglesAsteroides[i] = angle;
-}
+    for(int i=0;i<asteroides.size();i++){
+        float angle = rand() % 360; // Genera un número aleatorio entre 0 y 359
+        anglesAsteroides[i] = angle;
+    }
 
     int verticesprueba=1;
 
@@ -849,8 +951,27 @@ for(int i=0;i<asteroides.size();i++){
         EstelaUrano.Desfasar(NoLight, view1, projection1, angleUranus, Uranus.getRot(), raioUranus, 10);
         EstelaNeptuno.Desfasar(NoLight, view1, projection1, angleNeptune, Neptune.getRot(), raioNeptune, 17);
 
+        MercuryLabel.justorbita_Render(NoLight, view1, projection1, angleMercury, Mercury.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
+        VenusLabel.justorbita_Render(NoLight, view1, projection1, angleVenus, Venus.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
+        TierraLabel.justorbita_Render(NoLight, view1, projection1, angle, Earth.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
+        MarsLabel.justorbita_Render(NoLight, view1, projection1, angleMars, Mars.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
+        JupiterLabel.justorbita_Render(NoLight, view1, projection1, angleJupiter, Jupiter.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
+        SaturnLabel.justorbita_Render(NoLight, view1, projection1, angleSaturn, Saturn.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
+        UranusLabel.justorbita_Render(NoLight, view1, projection1, angleUranus, Uranus.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
+        NeptuneLabel.justorbita_Render(NoLight, view1, projection1, angleNeptune, Neptune.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
+        
         Stars.rotacion_Render(NoLight, -0.1f, {1.0f, 0.0f, 0.0f});
-        // OrbitaMercury.modelrender(NoLight);
+
+
+        // // OrbitaVenus.modelrender(NoLight);
+        // // OrbitaMercury.modelrender(NoLight);
+        // // OrbitaEarth.modelrender(NoLight);
+        // // OrbitaMars.modelrender(NoLight);
+        // // OrbitaJupiter.modelrender(NoLight);
+        // // OrbitaSaturno.modelrender(NoLight);
+        // // OrbitaUrano.modelrender(NoLight);
+        // // OrbitaNeptuno.modelrender(NoLight);
+
 
         Anillos.orbita_Render(NoLight, -angleSaturn, Saturn.getRaio(), {0.0f, 0.0f, 1.0f});
 
@@ -863,10 +984,9 @@ for(int i=0;i<asteroides.size();i++){
 
 
 
-		// setupShader(ourShader, camera.GetViewMatrix(), SCR_WIDTH/2 - 15, SCR_HEIGHT - 20);
         Earth.orbita_Render(ourShader,  angle, rt, {0.0f, 1.0f, 0.0f});
         Moon.orbita_orbita_Render(ourShader, angle, rt, 0.2f, {0.0f, 1.0f, 0.0f});
-        Mercury.orbita_Render(ourShader, angleMercury, raioMercury, {0.1f, 1.0f, 0.0f});
+        Mercury.orbita_Render(ourShader, angleMercury, raioMercury, {0.0f, 1.0f, 0.0f});
         Venus.orbita_Render(ourShader, angleVenus, raioVenus, {0.0f, 1.0f, 0.0f});
         Mars.orbita_Render(ourShader, angleMars, raioMars, {0.0f, 1.0f, 0.0f});
         Jupiter.orbita_Render(ourShader, angleJupiter, raioJupiter, {0.0f, 1.0f, 0.0f});
@@ -889,6 +1009,17 @@ for(int i=0;i<asteroides.size();i++){
 
         Sun.rotacion_Render(NoLight, 0.01f* acelera, {0.0f, 1.0f, 0.0f});
         Stars.rotacion_Render(NoLight, -0.01f, {1.0f, 0.0f, 0.0f});
+
+        OrbitaVenus.modelrender(NoLight);
+        OrbitaMercury.modelrender(NoLight);
+        OrbitaEarth.modelrender(NoLight);
+        OrbitaMars.modelrender(NoLight);
+        OrbitaJupiter.modelrender(NoLight);
+        OrbitaSaturno.modelrender(NoLight);
+        OrbitaUrano.modelrender(NoLight);
+        OrbitaNeptuno.modelrender(NoLight);
+
+
         Anillos.orbita_Render(NoLight, -angleSaturn, raioSaturn, {0.0f, 0.0f, 1.0f});
         
         for (int i = 0; i < asteroides.size(); i++) {
@@ -900,7 +1031,7 @@ for(int i=0;i<asteroides.size();i++){
         setupShader(ourShader, view2, projection2);
         Earth.orbita_Render(ourShader,  angle, rt, {0.0f, 1.0f, 0.0f});
         Moon.orbita_orbita_Render(ourShader, angle, rt, 0.2f, {0.0f, 1.0f, 0.0f});
-        Mercury.orbita_Render(ourShader, angleMercury, raioMercury, {0.1f, 1.0f, 0.0f});
+        Mercury.orbita_Render(ourShader, angleMercury, raioMercury, {0.0f, 1.0f, 0.0f});
         Venus.orbita_Render(ourShader, angleVenus, raioVenus, {0.0f, 1.0f, 0.0f});
         Mars.orbita_Render(ourShader, angleMars, raioMars, {0.0f, 1.0f, 0.0f});
         Jupiter.orbita_Render(ourShader, angleJupiter, raioJupiter, {0.0f, 1.0f, 0.0f});
