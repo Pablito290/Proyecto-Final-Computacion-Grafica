@@ -12,7 +12,8 @@
 #include <sstream>
 #include <vector>
 #include <memory>
-
+#include<windows.h>
+#include <direct.h> 
 #include <unordered_map>
 #include "learnopengl/shader_s.h"
 #include "learnopengl/camera.h"
@@ -32,27 +33,28 @@ namespace fs = std::filesystem;
 using namespace std;
 
 
-string Mercurio = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\Mercury.jpg";
-string VenusT = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\Venus.jpg";
-string Tierra = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\Earth.jpg";
-string Marte = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\Mars.jpg";
-string Luna = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\Moon.jpg";
-string Estrellas = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\Stars.jpg";
-string AnillosT = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\AnillosS2.png";
-string Saturno = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\Saturno.jpg";
-string JupiterT = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\Jupiter.jpg";
-string Urano = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\Urano.jpg";
-string Neptuno = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\Neptuno.jpg";
-string Sol = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\Sol.jpg";
-string blanco = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\Blanco.jpg";
-string Tierralabel = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\TierraLabel.jpg";
-string Venuslabel = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\VenusLabel.jpeg";
-string Mercuriolabel = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\MercurioLabel.jpeg";
-string Martelabel = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\MarteLabel.jpeg";
-string Jupiterlabel = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\JupiterLabel.jpeg";
-string Saturnolabel = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\SaturnoLabel.jpeg";
-string Uranolabel = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\UranoLabel.jpeg";
-string Neptunolabel = "C:\\Users\\pacit\\Desktop\\GraficaUSB\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\NeptunoLabel.jpeg";
+string Mercurio = "\\glfw-master\\OwnProjects\\Project_02\\Textures\\Mercury.jpg";
+string VenusT = "\\glfw-master\\OwnProjects\\Project_02\\Textures\\Venus.jpg";
+string Tierra = "\\glfw-master\\OwnProjects\\Project_02\\Textures\\Earth.jpg";
+string Marte = "\\glfw-master\\OwnProjects\\Project_02\\Textures\\Mars.jpg";
+string Luna = "\\glfw-master\\OwnProjects\\Project_02\\Textures\\Moon.jpg";
+string Estrellas = "\\glfw-master\\OwnProjects\\Project_02\\Textures\\Stars.jpg";
+string AnillosT = "\\glfw-master\\OwnProjects\\Project_02\\Textures\\AnillosS2.png";
+string Saturno = "\\glfw-master\\OwnProjects\\Project_02\\Textures\\Saturno.jpg";
+string JupiterT = "\\glfw-master\\OwnProjects\\Project_02\\Textures\\Jupiter.jpg";
+string Urano = "\\glfw-master\\OwnProjects\\Project_02\\Textures\\Urano.jpg";
+string Neptuno = "\\glfw-master\\OwnProjects\\Project_02\\Textures\\Neptuno.jpg";
+string Sol = "\\glfw-master\\OwnProjects\\Project_02\\Textures\\Sol.jpg";
+string blanco = "\\LabCompiler2023_II_CG\\glfw-master\\OwnProjects\\Project_02\\Textures\\Blanco.jpg";
+string Tierralabel = "\\glfw-master\\OwnProjects\\Project_02\\Textures\\TierraLabel.jpg";
+string Venuslabel = "\\glfw-master\\OwnProjects\\Project_02\\Textures\\VenusLabel.jpeg";
+string Mercuriolabel = "\\glfw-master\\OwnProjects\\Project_02\\Textures\\MercurioLabel.jpeg";
+string Martelabel = "\\glfw-master\\OwnProjects\\Project_02\\Textures\\MarteLabel.jpeg";
+string Jupiterlabel = "\\glfw-master\\OwnProjects\\Project_02\\Textures\\JupiterLabel.jpeg";
+string Saturnolabel = "\\glfw-master\\OwnProjects\\Project_02\\Textures\\SaturnoLabel.jpeg";
+string Uranolabel = "\\glfw-master\\OwnProjects\\Project_02\\Textures\\UranoLabel.jpeg";
+string Neptunolabel = "\\glfw-master\\OwnProjects\\Project_02\\Textures\\NeptunoLabel.jpeg";
+string guiaLabel = "\\glfw-master\\OwnProjects\\Project_02\\Textures\\guia.jpg";
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
@@ -67,12 +69,172 @@ Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
-int vista2 = 0;
+int op = 0;
 
 float deltaTime = 0.0f;	
 float lastFrame = 0.0f;
 
+class Guia {
+public:
+    Guia(const char* imagePath) : imagePath(imagePath) {}
 
+    void init() {
+        shaderProgram = createShaderProgram();
+        setupBuffers();
+        setupTexture();
+    }
+
+    void render() {
+            glClear(GL_COLOR_BUFFER_BIT);
+            glUseProgram(shaderProgram);
+            glBindTexture(GL_TEXTURE_2D, texture);
+            glBindVertexArray(VAO);
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+            glBindVertexArray(0);
+
+    }
+
+    void cleanup() {
+        glDeleteVertexArrays(1, &VAO);
+        glDeleteBuffers(1, &VBO);
+        glDeleteBuffers(1, &EBO);
+        glDeleteProgram(shaderProgram);
+        glDeleteTextures(1, &texture);
+        glfwTerminate();
+    }
+
+private:
+    GLFWwindow* window;
+    GLuint VAO, VBO, EBO;
+    GLuint shaderProgram;
+    GLuint texture;
+    const char* imagePath;
+
+    GLuint compileShader(GLenum type, const char* source) {
+        GLuint shader = glCreateShader(type);
+        glShaderSource(shader, 1, &source, NULL);
+        glCompileShader(shader);
+
+        int success;
+        char infoLog[512];
+        glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+        if (!success) {
+            glGetShaderInfoLog(shader, 512, NULL, infoLog);
+            std::cerr << "ERROR::SHADER::COMPILATION_FAILED\n" << infoLog << std::endl;
+            std::exit(EXIT_FAILURE);
+        }
+
+        return shader;
+    }
+
+    GLuint createShaderProgram() {
+        const char* vertexShaderSource = R"(
+        #version 330 core
+        layout(location = 0) in vec3 aPos;
+        layout(location = 1) in vec2 aTexCoord;
+
+        out vec2 TexCoord;
+
+        void main() {
+            gl_Position = vec4(aPos, 1.0);
+            TexCoord = aTexCoord;
+        }
+        )";
+
+        const char* fragmentShaderSource = R"(
+        #version 330 core
+        out vec4 FragColor;
+
+        in vec2 TexCoord;
+
+        uniform sampler2D texture1;
+
+        void main() {
+            FragColor = texture(texture1, TexCoord);
+        }
+        )";
+
+        GLuint vertexShader = compileShader(GL_VERTEX_SHADER, vertexShaderSource);
+        GLuint fragmentShader = compileShader(GL_FRAGMENT_SHADER, fragmentShaderSource);
+
+        GLuint shaderProgram = glCreateProgram();
+        glAttachShader(shaderProgram, vertexShader);
+        glAttachShader(shaderProgram, fragmentShader);
+        glLinkProgram(shaderProgram);
+
+        int success;
+        char infoLog[512];
+        glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+        if (!success) {
+            glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
+            std::cerr << "ERROR::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
+            std::exit(EXIT_FAILURE);
+        }
+
+        glDeleteShader(vertexShader);
+        glDeleteShader(fragmentShader);
+
+        return shaderProgram;
+    }
+
+    void setupBuffers() {
+        float vertices[] = {
+            1.0f,  -1.0, 0.0f,   1.0f, 1.0f, // top right
+            1.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+            -1.0f, 1.0f, 0.0f,   0.0f, 0.0f, // bottom left
+            -1.0f,  -1.0f, 0.0f,   0.0f, 1.0f  // top left 
+        };
+
+        unsigned int indices[] = {
+            0, 1, 3, // first triangle
+            1, 2, 3  // second triangle
+        };
+
+        glGenVertexArrays(1, &VAO);
+        glGenBuffers(1, &VBO);
+        glGenBuffers(1, &EBO);
+
+        glBindVertexArray(VAO);
+
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+        glEnableVertexAttribArray(0);
+
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+        glEnableVertexAttribArray(1);
+
+        glBindVertexArray(0); // Unbind VAO
+    }
+
+    void setupTexture() {
+        int width, height, nrChannels;
+        unsigned char* data = stbi_load(imagePath, &width, &height, &nrChannels, 0);
+
+        if (data) {
+            glGenTextures(1, &texture);
+            glBindTexture(GL_TEXTURE_2D, texture);
+
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+            glGenerateMipmap(GL_TEXTURE_2D);
+
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+            stbi_image_free(data);
+        } else {
+            std::cout << "Failed to load texture" << std::endl;
+            stbi_image_free(data);
+            std::exit(EXIT_FAILURE);
+        }
+    }
+};
 class Objeto {
 public:
     Objeto(const vector<float>& _vertices, const vector<unsigned int>& _indices, const string& _texturePath)
@@ -712,6 +874,34 @@ void setupShader(Shader &shader, const glm::mat4& view, const glm::mat4& project
 
 int main()
 {
+
+    char tmp[256];
+	getcwd(tmp, 256);
+	string pathRadical = (string) tmp;
+	pathRadical.erase(pathRadical.length() - 16);
+	Mercurio = pathRadical + Mercurio;
+    VenusT = pathRadical + VenusT;
+	Tierra = pathRadical + Tierra;
+	Marte = pathRadical + Marte;
+	Luna = pathRadical + Luna;
+	Estrellas = pathRadical + Estrellas;
+	AnillosT = pathRadical + AnillosT;
+	Saturno = pathRadical + Saturno;
+	JupiterT = pathRadical + JupiterT;
+	Urano = pathRadical + Urano;
+	Neptuno = pathRadical + Neptuno;
+	Sol = pathRadical + Sol;
+	blanco = pathRadical + blanco;
+	Tierralabel = pathRadical  +  Tierralabel;
+	Venuslabel = pathRadical + Venuslabel;
+	Mercuriolabel = pathRadical + Mercuriolabel;
+	Martelabel = pathRadical + Martelabel ;
+	Jupiterlabel = pathRadical + Jupiterlabel;
+	Saturnolabel = pathRadical + Saturnolabel;
+	Uranolabel = pathRadical + Uranolabel;
+	Neptunolabel = pathRadical + Neptunolabel;
+	guiaLabel = pathRadical + guiaLabel;
+
     // glfw: initialize and configure
     // ------------------------------
     glfwInit();
@@ -914,6 +1104,9 @@ int main()
 	glm::mat4 view = glm::mat4(1.0f), projection =  glm::mat4(1.0f);
 	glm::vec3 cameraPos, cameraTarget, cameraUp;
     float radius, camX, camZ, camY;
+
+    Guia guia(guiaLabel.c_str());
+    guia.init();
     
     while (!glfwWindowShouldClose(window)) {
 
@@ -923,130 +1116,227 @@ int main()
         processInput(window);
         glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-      
-		raioMercury= Mercury.getRaio();
-		raioVenus=Venus.getRaio();
-		raioMars= Mars.getRaio();
-		raioJupiter= Jupiter.getRaio();
-		raioSaturn= Saturn.getRaio();
-		raioUranus= Uranus.getRaio();
-		raioNeptune= Neptune.getRaio();
-		rt = Earth.getRaio();
 		
-		glViewport(10, 10, SCR_WIDTH / 2 - 15, SCR_HEIGHT - 20);
-        glm::mat4 view1 = camera.GetViewMatrix();
-        glm::mat4 projection1 = glm::perspective(glm::radians(camera.Zoom), (float)(SCR_WIDTH / 2 - 15) / (float)SCR_HEIGHT, 0.1f, 100.0f);
-        setupShader(NoLight, view1, projection1);
-
-        Sun.rotacion_Render(NoLight, 0.01f* acelera, {0.0f, 1.0f, 0.0f});
-        EstelaSol.Desfasar(NoLight, view1, projection1, 0, 0, 0, 3);
-        EstelaMercury.Desfasar(NoLight, view1, projection1, angleMercury, Mercury.getRot(), raioMercury, 7);
-        EstelaVenus.Desfasar(NoLight, view1, projection1, angleVenus, Venus.getRot(), raioVenus, 3);
-
-        EstelaTierra.Desfasar(NoLight, view1, projection1, angle, Earth.getRot() , rt,4);
-        EstelaMarte.Desfasar(NoLight, view1, projection1, angleMars, Mars.getRot(), raioMars, 15);
-        EstelaJupiter.Desfasar(NoLight, view1, projection1, angleJupiter, Jupiter.getRot(), raioJupiter, 5);
-        EstelaSaturno.Desfasar(NoLight, view1, projection1, angleSaturn, Saturn.getRot(), raioSaturn, 6);
-        EstelaUrano.Desfasar(NoLight, view1, projection1, angleUranus, Uranus.getRot(), raioUranus, 10);
-        EstelaNeptuno.Desfasar(NoLight, view1, projection1, angleNeptune, Neptune.getRot(), raioNeptune, 17);
-
-        MercuryLabel.justorbita_Render(NoLight, view1, projection1, angleMercury, Mercury.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
-        VenusLabel.justorbita_Render(NoLight, view1, projection1, angleVenus, Venus.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
-        TierraLabel.justorbita_Render(NoLight, view1, projection1, angle, Earth.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
-        MarsLabel.justorbita_Render(NoLight, view1, projection1, angleMars, Mars.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
-        JupiterLabel.justorbita_Render(NoLight, view1, projection1, angleJupiter, Jupiter.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
-        SaturnLabel.justorbita_Render(NoLight, view1, projection1, angleSaturn, Saturn.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
-        UranusLabel.justorbita_Render(NoLight, view1, projection1, angleUranus, Uranus.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
-        NeptuneLabel.justorbita_Render(NoLight, view1, projection1, angleNeptune, Neptune.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
-        
-        Stars.rotacion_Render(NoLight, -0.1f, {1.0f, 0.0f, 0.0f});
-
-
-        // // OrbitaVenus.modelrender(NoLight);
-        // // OrbitaMercury.modelrender(NoLight);
-        // // OrbitaEarth.modelrender(NoLight);
-        // // OrbitaMars.modelrender(NoLight);
-        // // OrbitaJupiter.modelrender(NoLight);
-        // // OrbitaSaturno.modelrender(NoLight);
-        // // OrbitaUrano.modelrender(NoLight);
-        // // OrbitaNeptuno.modelrender(NoLight);
-
-
-        Anillos.orbita_Render(NoLight, -angleSaturn, Saturn.getRaio(), {0.0f, 0.0f, 1.0f});
-
-        for (int i = 0; i < asteroides.size(); i++) {
-            asteroides[i]->orbita_Render(NoLight, anglesAsteroides[i], 6.5, {1.0f, 1.0f, 0.0f});
-            anglesAsteroides[i] += 0.001f;
-        }
-
-        setupShader(ourShader, view1, projection1);
-
-
-
-        Earth.orbita_Render(ourShader,  angle, rt, {0.0f, 1.0f, 0.0f});
-        Moon.orbita_orbita_Render(ourShader, angle, rt, 0.2f, {0.0f, 1.0f, 0.0f});
-        Mercury.orbita_Render(ourShader, angleMercury, raioMercury, {0.0f, 1.0f, 0.0f});
-        Venus.orbita_Render(ourShader, angleVenus, raioVenus, {0.0f, 1.0f, 0.0f});
-        Mars.orbita_Render(ourShader, angleMars, raioMars, {0.0f, 1.0f, 0.0f});
-        Jupiter.orbita_Render(ourShader, angleJupiter, raioJupiter, {0.0f, 1.0f, 0.0f});
-        Saturn.orbita_Render(ourShader, angleSaturn, raioSaturn, {0.0f, 1.0f, 0.0f});
-        Uranus.orbita_Render(ourShader, angleUranus, raioUranus, {0.0f, 1.0f, 0.0f});
-        Neptune.orbita_Render(ourShader, angleNeptune,raioNeptune, {0.0f, 1.0f, 0.0f});
-		//-----------------------------------------------------------------------------------------------------------------------
-		glViewport(SCR_WIDTH / 2 + 5, 10, SCR_WIDTH / 2 - 15, SCR_HEIGHT - 20);
-        radius = 8.0f;
-        camX = sin(glfwGetTime()) * radius;
-        camZ = cos(glfwGetTime()) * radius;
-        camY = cos(glfwGetTime()) * radius;
-        cameraPos = glm::vec3(camX, camY, camZ);
-        cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
-        cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
-        glm::mat4 view2 = glm::lookAt(cameraPos, cameraTarget, cameraUp);
-        glm::mat4 projection2 = glm::perspective(glm::radians(45.0f), (float)(SCR_WIDTH / 2 - 15) / (float)SCR_HEIGHT, 0.1f, 100.0f);
-        setupShader(NoLight, view2, projection2);
-
-
-        Sun.rotacion_Render(NoLight, 0.01f* acelera, {0.0f, 1.0f, 0.0f});
-        Stars.rotacion_Render(NoLight, -0.01f, {1.0f, 0.0f, 0.0f});
-
-        OrbitaVenus.modelrender(NoLight);
-        OrbitaMercury.modelrender(NoLight);
-        OrbitaEarth.modelrender(NoLight);
-        OrbitaMars.modelrender(NoLight);
-        OrbitaJupiter.modelrender(NoLight);
-        OrbitaSaturno.modelrender(NoLight);
-        OrbitaUrano.modelrender(NoLight);
-        OrbitaNeptuno.modelrender(NoLight);
-
-
-        Anillos.orbita_Render(NoLight, -angleSaturn, raioSaturn, {0.0f, 0.0f, 1.0f});
-        
-        for (int i = 0; i < asteroides.size(); i++) {
-            asteroides[i]->orbita_Render(NoLight, anglesAsteroides[i], 4.5 ,{1.0f, 1.0f, 0.0f});
-            anglesAsteroides[i] += 0.001f;
-        }
-
-
-        setupShader(ourShader, view2, projection2);
-        Earth.orbita_Render(ourShader,  angle, rt, {0.0f, 1.0f, 0.0f});
-        Moon.orbita_orbita_Render(ourShader, angle, rt, 0.2f, {0.0f, 1.0f, 0.0f});
-        Mercury.orbita_Render(ourShader, angleMercury, raioMercury, {0.0f, 1.0f, 0.0f});
-        Venus.orbita_Render(ourShader, angleVenus, raioVenus, {0.0f, 1.0f, 0.0f});
-        Mars.orbita_Render(ourShader, angleMars, raioMars, {0.0f, 1.0f, 0.0f});
-        Jupiter.orbita_Render(ourShader, angleJupiter, raioJupiter, {0.0f, 1.0f, 0.0f});
-        Saturn.orbita_Render(ourShader, angleSaturn, raioSaturn, {0.0f, 1.0f, 0.0f});
-        Uranus.orbita_Render(ourShader, angleUranus, raioUranus, {0.0f, 1.0f, 0.0f});
-        Neptune.orbita_Render(ourShader, angleNeptune, raioNeptune, {0.0f, 1.0f, 0.0f});
+		if (op == 0)
+		{
+			glViewport(10, 10, SCR_WIDTH - 20, SCR_HEIGHT - 20);
+			guia.render();
+		}
 		
-        angle += Earth.getRot();
-        angleMercury += Mercury.getRot();
-        angleVenus += Venus.getRot();
-        angleMars += Mars.getRot();
-        angleJupiter += Jupiter.getRot();
-        angleSaturn += Saturn.getRot();
-        angleUranus += Uranus.getRot();
-        angleNeptune += Neptune.getRot();
+		if(op == 2)
+		{
+			raioMercury= Mercury.getRaio();
+			raioVenus=Venus.getRaio();
+			raioMars= Mars.getRaio();
+			raioJupiter= Jupiter.getRaio();
+			raioSaturn= Saturn.getRaio();
+			raioUranus= Uranus.getRaio();
+			raioNeptune= Neptune.getRaio();
+			rt = Earth.getRaio();
+		
+			glViewport(10, 10, SCR_WIDTH - 20, SCR_HEIGHT - 20);
+			glm::mat4 view1 = camera.GetViewMatrix();
+			glm::mat4 projection1 =  glm::perspective(glm::radians(45.0f), (float)(SCR_WIDTH  - 20) / (float)(SCR_HEIGHT - 20), 0.1f, 100.0f);
+			setupShader(NoLight, view1, projection1);
+
+			Sun.rotacion_Render(NoLight, 0.01f* acelera, {0.0f, 1.0f, 0.0f});
+			EstelaSol.Desfasar(NoLight, view1, projection1, 0, 0, 0, 3);
+			EstelaMercury.Desfasar(NoLight, view1, projection1, angleMercury, Mercury.getRot(), raioMercury, 7);
+			EstelaVenus.Desfasar(NoLight, view1, projection1, angleVenus, Venus.getRot(), raioVenus, 3);
+
+			EstelaTierra.Desfasar(NoLight, view1, projection1, angle, Earth.getRot() , rt,4);
+			EstelaMarte.Desfasar(NoLight, view1, projection1, angleMars, Mars.getRot(), raioMars, 15);
+			EstelaJupiter.Desfasar(NoLight, view1, projection1, angleJupiter, Jupiter.getRot(), raioJupiter, 5);
+			EstelaSaturno.Desfasar(NoLight, view1, projection1, angleSaturn, Saturn.getRot(), raioSaturn, 6);
+			EstelaUrano.Desfasar(NoLight, view1, projection1, angleUranus, Uranus.getRot(), raioUranus, 10);
+			EstelaNeptuno.Desfasar(NoLight, view1, projection1, angleNeptune, Neptune.getRot(), raioNeptune, 17);
+
+			MercuryLabel.justorbita_Render(NoLight, view1, projection1, angleMercury, Mercury.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
+			VenusLabel.justorbita_Render(NoLight, view1, projection1, angleVenus, Venus.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
+			TierraLabel.justorbita_Render(NoLight, view1, projection1, angle, Earth.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
+			MarsLabel.justorbita_Render(NoLight, view1, projection1, angleMars, Mars.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
+			JupiterLabel.justorbita_Render(NoLight, view1, projection1, angleJupiter, Jupiter.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
+			SaturnLabel.justorbita_Render(NoLight, view1, projection1, angleSaturn, Saturn.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
+			UranusLabel.justorbita_Render(NoLight, view1, projection1, angleUranus, Uranus.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
+			NeptuneLabel.justorbita_Render(NoLight, view1, projection1, angleNeptune, Neptune.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
+			
+			Stars.rotacion_Render(NoLight, -0.1f, {1.0f, 0.0f, 0.0f});
+
+
+			// // OrbitaVenus.modelrender(NoLight);
+			// // OrbitaMercury.modelrender(NoLight);
+			// // OrbitaEarth.modelrender(NoLight);
+			// // OrbitaMars.modelrender(NoLight);
+			// // OrbitaJupiter.modelrender(NoLight);
+			// // OrbitaSaturno.modelrender(NoLight);
+			// // OrbitaUrano.modelrender(NoLight);
+			// // OrbitaNeptuno.modelrender(NoLight);
+
+
+			Anillos.orbita_Render(NoLight, -angleSaturn, Saturn.getRaio(), {0.0f, 0.0f, 1.0f});
+
+			for (int i = 0; i < asteroides.size(); i++) {
+				asteroides[i]->orbita_Render(NoLight, anglesAsteroides[i], 6.5, {1.0f, 1.0f, 0.0f});
+				anglesAsteroides[i] += 0.001f;
+			}
+
+			setupShader(ourShader, view1, projection1);
+
+
+
+			Earth.orbita_Render(ourShader,  angle, rt, {0.0f, 1.0f, 0.0f});
+			Moon.orbita_orbita_Render(ourShader, angle, rt, 0.2f, {0.0f, 1.0f, 0.0f});
+			Mercury.orbita_Render(ourShader, angleMercury, raioMercury, {0.0f, 1.0f, 0.0f});
+			Venus.orbita_Render(ourShader, angleVenus, raioVenus, {0.0f, 1.0f, 0.0f});
+			Mars.orbita_Render(ourShader, angleMars, raioMars, {0.0f, 1.0f, 0.0f});
+			Jupiter.orbita_Render(ourShader, angleJupiter, raioJupiter, {0.0f, 1.0f, 0.0f});
+			Saturn.orbita_Render(ourShader, angleSaturn, raioSaturn, {0.0f, 1.0f, 0.0f});
+			Uranus.orbita_Render(ourShader, angleUranus, raioUranus, {0.0f, 1.0f, 0.0f});
+			Neptune.orbita_Render(ourShader, angleNeptune,raioNeptune, {0.0f, 1.0f, 0.0f});
+			
+			angle += Earth.getRot();
+			angleMercury += Mercury.getRot();
+			angleVenus += Venus.getRot();
+			angleMars += Mars.getRot();
+			angleJupiter += Jupiter.getRot();
+			angleSaturn += Saturn.getRot();
+			angleUranus += Uranus.getRot();
+			angleNeptune += Neptune.getRot();
+			
+			
+		}
+		
+		if(op == 1){  
+			raioMercury= Mercury.getRaio();
+			raioVenus=Venus.getRaio();
+			raioMars= Mars.getRaio();
+			raioJupiter= Jupiter.getRaio();
+			raioSaturn= Saturn.getRaio();
+			raioUranus= Uranus.getRaio();
+			raioNeptune= Neptune.getRaio();
+			rt = Earth.getRaio();
+		
+			glViewport(10, 10, SCR_WIDTH / 2 - 15, SCR_HEIGHT - 20);
+			radius = 8.0f;
+			camX = sin(glfwGetTime()) * radius;
+			camZ = cos(glfwGetTime()) * radius;
+			camY = cos(glfwGetTime()) * radius;
+			cameraPos = glm::vec3(camX, camY, camZ);
+			cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+			cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+			glm::mat4 view1 = glm::lookAt(cameraPos, cameraTarget, cameraUp);
+			glm::mat4 projection1 = glm::perspective(glm::radians(45.0f), (float)(SCR_WIDTH / 2 - 15) / (float)(SCR_HEIGHT - 20), 0.1f, 100.0f);
+			setupShader(NoLight, view1, projection1);
+
+			Sun.rotacion_Render(NoLight, 0.01f* acelera, {0.0f, 1.0f, 0.0f});
+			EstelaSol.Desfasar(NoLight, view1, projection1, 0, 0, 0, 3);
+			EstelaMercury.Desfasar(NoLight, view1, projection1, angleMercury, Mercury.getRot(), raioMercury, 7);
+			EstelaVenus.Desfasar(NoLight, view1, projection1, angleVenus, Venus.getRot(), raioVenus, 3);
+
+			EstelaTierra.Desfasar(NoLight, view1, projection1, angle, Earth.getRot() , rt,4);
+			EstelaMarte.Desfasar(NoLight, view1, projection1, angleMars, Mars.getRot(), raioMars, 15);
+			EstelaJupiter.Desfasar(NoLight, view1, projection1, angleJupiter, Jupiter.getRot(), raioJupiter, 5);
+			EstelaSaturno.Desfasar(NoLight, view1, projection1, angleSaturn, Saturn.getRot(), raioSaturn, 6);
+			EstelaUrano.Desfasar(NoLight, view1, projection1, angleUranus, Uranus.getRot(), raioUranus, 10);
+			EstelaNeptuno.Desfasar(NoLight, view1, projection1, angleNeptune, Neptune.getRot(), raioNeptune, 17);
+
+			MercuryLabel.justorbita_Render(NoLight, view1, projection1, angleMercury, Mercury.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
+			VenusLabel.justorbita_Render(NoLight, view1, projection1, angleVenus, Venus.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
+			TierraLabel.justorbita_Render(NoLight, view1, projection1, angle, Earth.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
+			MarsLabel.justorbita_Render(NoLight, view1, projection1, angleMars, Mars.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
+			JupiterLabel.justorbita_Render(NoLight, view1, projection1, angleJupiter, Jupiter.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
+			SaturnLabel.justorbita_Render(NoLight, view1, projection1, angleSaturn, Saturn.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
+			UranusLabel.justorbita_Render(NoLight, view1, projection1, angleUranus, Uranus.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
+			NeptuneLabel.justorbita_Render(NoLight, view1, projection1, angleNeptune, Neptune.getRaio(), {0.0f, 1.0f, 0.0f}, -0.1f);
+			
+			Stars.rotacion_Render(NoLight, -0.1f, {1.0f, 0.0f, 0.0f});
+
+
+			// // OrbitaVenus.modelrender(NoLight);
+			// // OrbitaMercury.modelrender(NoLight);
+			// // OrbitaEarth.modelrender(NoLight);
+			// // OrbitaMars.modelrender(NoLight);
+			// // OrbitaJupiter.modelrender(NoLight);
+			// // OrbitaSaturno.modelrender(NoLight);
+			// // OrbitaUrano.modelrender(NoLight);
+			// // OrbitaNeptuno.modelrender(NoLight);
+
+
+			Anillos.orbita_Render(NoLight, -angleSaturn, Saturn.getRaio(), {0.0f, 0.0f, 1.0f});
+
+			for (int i = 0; i < asteroides.size(); i++) {
+				asteroides[i]->orbita_Render(NoLight, anglesAsteroides[i], 6.5, {1.0f, 1.0f, 0.0f});
+				anglesAsteroides[i] += 0.001f;
+			}
+
+			setupShader(ourShader, view1, projection1);
+
+
+
+			Earth.orbita_Render(ourShader,  angle, rt, {0.0f, 1.0f, 0.0f});
+			Moon.orbita_orbita_Render(ourShader, angle, rt, 0.2f, {0.0f, 1.0f, 0.0f});
+			Mercury.orbita_Render(ourShader, angleMercury, raioMercury, {0.0f, 1.0f, 0.0f});
+			Venus.orbita_Render(ourShader, angleVenus, raioVenus, {0.0f, 1.0f, 0.0f});
+			Mars.orbita_Render(ourShader, angleMars, raioMars, {0.0f, 1.0f, 0.0f});
+			Jupiter.orbita_Render(ourShader, angleJupiter, raioJupiter, {0.0f, 1.0f, 0.0f});
+			Saturn.orbita_Render(ourShader, angleSaturn, raioSaturn, {0.0f, 1.0f, 0.0f});
+			Uranus.orbita_Render(ourShader, angleUranus, raioUranus, {0.0f, 1.0f, 0.0f});
+			Neptune.orbita_Render(ourShader, angleNeptune,raioNeptune, {0.0f, 1.0f, 0.0f});
+			//-----------------------------------------------------------------------------------------------------------------------
+			glViewport(SCR_WIDTH / 2 + 5, 10, SCR_WIDTH / 2 - 15, SCR_HEIGHT - 20);
+			radius = 8.0f;
+			camX = sin(glfwGetTime()) * radius;
+			camZ = cos(glfwGetTime()) * radius;
+			camY = cos(glfwGetTime()) * radius;
+			cameraPos = glm::vec3(camX, camY, camZ);
+			cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+			cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+			glm::mat4 view2 = glm::lookAt(cameraPos, cameraTarget, cameraUp);
+			glm::mat4 projection2 = glm::perspective(glm::radians(45.0f), (float)(SCR_WIDTH / 2 - 15) / (float)(SCR_HEIGHT - 20), 0.1f, 100.0f);
+			setupShader(NoLight, view2, projection2);
+
+
+			Sun.rotacion_Render(NoLight, 0.01f* acelera, {0.0f, 1.0f, 0.0f});
+			Stars.rotacion_Render(NoLight, -0.01f, {1.0f, 0.0f, 0.0f});
+
+			OrbitaVenus.modelrender(NoLight);
+			OrbitaMercury.modelrender(NoLight);
+			OrbitaEarth.modelrender(NoLight);
+			OrbitaMars.modelrender(NoLight);
+			OrbitaJupiter.modelrender(NoLight);
+			OrbitaSaturno.modelrender(NoLight);
+			OrbitaUrano.modelrender(NoLight);
+			OrbitaNeptuno.modelrender(NoLight);
+
+
+			Anillos.orbita_Render(NoLight, -angleSaturn, raioSaturn, {0.0f, 0.0f, 1.0f});
+			
+			for (int i = 0; i < asteroides.size(); i++) {
+				asteroides[i]->orbita_Render(NoLight, anglesAsteroides[i], 4.5 ,{1.0f, 1.0f, 0.0f});
+				anglesAsteroides[i] += 0.001f;
+			}
+
+
+			setupShader(ourShader, view2, projection2);
+			Earth.orbita_Render(ourShader,  angle, rt, {0.0f, 1.0f, 0.0f});
+			Moon.orbita_orbita_Render(ourShader, angle, rt, 0.2f, {0.0f, 1.0f, 0.0f});
+			Mercury.orbita_Render(ourShader, angleMercury, raioMercury, {0.0f, 1.0f, 0.0f});
+			Venus.orbita_Render(ourShader, angleVenus, raioVenus, {0.0f, 1.0f, 0.0f});
+			Mars.orbita_Render(ourShader, angleMars, raioMars, {0.0f, 1.0f, 0.0f});
+			Jupiter.orbita_Render(ourShader, angleJupiter, raioJupiter, {0.0f, 1.0f, 0.0f});
+			Saturn.orbita_Render(ourShader, angleSaturn, raioSaturn, {0.0f, 1.0f, 0.0f});
+			Uranus.orbita_Render(ourShader, angleUranus, raioUranus, {0.0f, 1.0f, 0.0f});
+			Neptune.orbita_Render(ourShader, angleNeptune, raioNeptune, {0.0f, 1.0f, 0.0f});
+			
+			angle += Earth.getRot();
+			angleMercury += Mercury.getRot();
+			angleVenus += Venus.getRot();
+			angleMars += Mars.getRot();
+			angleJupiter += Jupiter.getRot();
+			angleSaturn += Saturn.getRot();
+			angleUranus += Uranus.getRot();
+			angleNeptune += Neptune.getRot();
+		}
 
 
         glfwSwapBuffers(window);
@@ -1072,6 +1362,12 @@ void processInput(GLFWwindow *window)
         camera.ProcessKeyboard(LEFT, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         camera.ProcessKeyboard(RIGHT, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
+           op = 1;
+	if (glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS)
+        op = 2;
+	if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
+        op = 0;
 }
 
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
