@@ -399,21 +399,9 @@ public:
     }
 	
     float getRaio() {
-		 if (flagRaio)
-			 varX += divisorA * paso/ 360;
-		 else
-			 varX -= divisorA * paso / 360;
-		 if (varX >= divisorA && flagRaio == 1)
-		 {
-			 flagRaio = 0;
-			 varX = divisorA;
-		 }
-		 if (varX <= - divisorA  && flagRaio == 0)
-		 {
-			 flagRaio = 1;
-			 varX = - divisorA;
-		 }
-        return sqrt((varX + centro)* (varX + centro) + divisorB * divisorB * (1 - ((varX + centro)* (varX + centro)) /(divisorA * divisorA)));
+	angulo += paso;
+	float theta = angulo * M_PI / 720.0;
+	return divisorA * divisorB / sqrt(((divisorB * cos(theta)) * (divisorB * cos(theta)) +(divisorA *  sin(theta)) * (divisorA  * sin(theta))));
     }
 
 
